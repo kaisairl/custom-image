@@ -40,8 +40,9 @@ modules:
         - avengemedia/dms
         - alternateved/keyd
     install:
-      - dms
-      - keyd
+      packages:
+        - dms
+        - keyd
 
   - type: default-flatpaks
     configurations:
