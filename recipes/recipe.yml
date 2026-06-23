@@ -1,13 +1,13 @@
 ---
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 # image will be published to ghcr.io/<user>/<name>
-name: template
+name: custom-image
 # description will be included in the image's metadata
-description: This is my personal OS image.
+description: A custom Linux based image using blue-build/template.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-main
-image-version: 42 # latest is also supported if you want new updates ASAP
+base-image: ghcr.io/ublue-os/kinoite-main
+image-version: 44 # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
@@ -20,11 +20,28 @@ modules:
   - type: dnf
     repos:
       copr:
-        - atim/starship
+        - avengemedia/dms
+        - alternateved/keyd
+
     install:
       packages:
-        - micro
-        - starship
+        - keepassxc
+        - niri
+        - mpv
+        - yt-dlp
+        - fuzzel
+        - xdg-desktop-portal-gtk
+        - xdg-desktop-portal-gnome
+        - gnome-keyring
+        - xwayland-satellite
+        - alacritty
+        - btop
+        - nautilus
+        - neovim
+        - dms
+        - keyd
+        - openrgb
+
     remove:
       packages:
         # example: removing firefox (in favor of the flatpak)
@@ -38,8 +55,20 @@ modules:
         scope: system
         # If no repo information is specified, Flathub will be used by default
         install: # system flatpaks we want all users to have and not remove
-          - org.mozilla.firefox
-          - org.gnome.Loupe
+          - com.heroicgameslauncher.hgl
+          - com.github.tchx84.Flatseal
+          - com.brave.Browser
+          - com.valvesoftware.Steam
+          - org.gimp.GIMP
+          - dev.vencord.Vesktop
+          - io.github.kolunmi.Bazaar
+
       - scope: user # Also add Flathub user repo, but no user packages
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
+
+  - type: systemd
+    system:
+      enabled:
+        - podman.socket
+        - openrgb.service
