@@ -19,10 +19,6 @@ modules:
 
   - type: dnf
     repos:
-      copr:
-        - avengemedia/dms
-        - alternateved/keyd
-
     install:
       packages:
         - keepassxc
@@ -38,14 +34,15 @@ modules:
         - btop
         - nautilus
         - neovim
-        - dms
-        - keyd
         - openrgb
-
-    #remove:
-    #  packages:
-        # example: removing firefox (in favor of the flatpak)
-        # "firefox" is the main package, "firefox-langpacks" is a dependency
+  - type: dnf
+    repos:
+      copr:
+        - avengemedia/dms
+        - alternateved/keyd
+    install:
+      - dms
+      - keyd
 
   - type: default-flatpaks
     configurations:
