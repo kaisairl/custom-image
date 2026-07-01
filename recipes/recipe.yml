@@ -41,10 +41,12 @@ modules:
       copr:
         - avengemedia/dms
         - alternateved/keyd
+        - lionheartp/Hyprland
     install:
       packages:
         - dms
         - keyd
+        - noctalia-git
 
   - type: default-flatpaks
     configurations:
